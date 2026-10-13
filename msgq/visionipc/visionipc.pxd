@@ -19,10 +19,13 @@ cdef extern from "msgq/visionipc/visionbuf.h":
     size_t stride
     size_t uv_offset
     size_t idx
+    uint64_t cuda_ptr
     void set_frame_id(uint64_t id)
     uint64_t get_frame_id()
 
 cdef extern from "msgq/visionipc/visionipc.h":
+  const char * visionbuf_backend_name()
+
   struct VisionIpcBufExtra:
     uint32_t frame_id
     uint64_t timestamp_sof

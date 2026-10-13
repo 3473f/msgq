@@ -133,8 +133,10 @@ void VisionIpcServer::listener(){
       fds[i] = buffers[type][i]->fd;
       bufs[i] = *buffers[type][i];
 
-      // Remove some private ion metadata
+      // Remove some private ion/cuda metadata
       bufs[i].handle = 0;
+      bufs[i].cuda_ptr = 0;
+      bufs[i].cuda_handle = 0;
 
       bufs[i].server_id = server_id;
     }

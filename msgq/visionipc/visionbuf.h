@@ -37,6 +37,10 @@ class VisionBuf {
   // ion
   int handle = 0;
 
+  // cuda (process-local; only set by the CUDA backend)
+  uint64_t cuda_ptr = 0;
+  uint64_t cuda_handle = 0;
+
   void allocate(size_t len);
   void import();
   void init_yuv(size_t width, size_t height, size_t stride, size_t uv_offset);

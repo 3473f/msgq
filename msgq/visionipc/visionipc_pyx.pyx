@@ -11,6 +11,12 @@ from .visionipc cimport VisionIpcClient as cppVisionIpcClient
 from .visionipc cimport VisionBuf as cppVisionBuf
 from .visionipc cimport VisionIpcBufExtra, VisionStreamType
 from .visionipc cimport get_endpoint_name as cpp_get_endpoint_name
+from .visionipc cimport visionbuf_backend_name as cpp_visionbuf_backend_name
+
+
+def visionbuf_backend_name():
+  """Buffer backend this build uses: 'shm', 'ion' or 'cuda'."""
+  return cpp_visionbuf_backend_name().decode('ascii')
 
 
 def get_endpoint_name(string name, VisionStreamType stream):
@@ -52,6 +58,12 @@ cdef class VisionBuf:
   @property
   def fd(self):
     return self.buf.fd
+
+  @property
+  def cuda_ptr(self):
+    # Device address of this buffer in the current process, or None when the
+    # active backend is not CUDA.
+    return self.buf.cuda_ptr or None
 
   @property
   def frame_id(self):

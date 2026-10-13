@@ -17,6 +17,14 @@
 
 #include "msgq/visionipc/visionipc.h"
 
+#ifndef VISIONBUF_BACKEND_NAME
+#define VISIONBUF_BACKEND_NAME "unknown"
+#endif
+
+const char *visionbuf_backend_name() {
+  return VISIONBUF_BACKEND_NAME;
+}
+
 int ipc_connect(const char* socket_path) {
   int err;
 
